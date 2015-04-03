@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.msu.wegschei.flocking.GameActivity"
+    android:orientation="vertical">
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        class="edu.msu.wegschei.flocking.GameView"
+        android:id="@+id/gameView"
+        android:focusableInTouchMode="false"
+        android:layout_weight="6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/player_one"
+        android:id="@+id/textPlayer"
+        android:layout_weight="0.5"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/place_button"
+            android:id="@+id/buttonPlace"
+            android:layout_gravity="center"
+            android:onClick="onPlace" />
+    </FrameLayout>
+
+</LinearLayout>

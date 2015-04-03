@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Flocking</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_selection">SelectionActivity</string>
+    <string name="start_game">Prepare your flapper</string>
+    <string name="ostrich">Ostrich</string>
+    <string name="bananaquit">Bananaquit</string>
+    <string name="parrot">Parrot</string>
+    <string name="robin">Robin</string>
+    <string name="swallow">Swallow</string>
+    <string name="selectBird">Select your bird</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="player_one">Player 1: </string>
+    <string name="player_two">Player 2: </string>
+    <string name="input_name">Your Name Here</string>
+    <string name="place_button">Place</string>
+    <string name="game_title">The Flocking Game</string>
+    <string name="title_activity_score">ScoreActivity</string>
+    <string name="reset">Reset</string>
+    <string name="rules">Rules</string>
+    <string name="display_rules">Display Rules</string>
+    <string name="rules_text">\t\tPlease enter both players\' names into the text fields and then press \'Prepare your flapper\'.\n\n\t\t
+       The game will then present a bird selection screen for the first player.
+        While holding the device so the other player cannot see, player one will select a bird from 5 different birds given.
+        When the bird is selected, the process repeats for player two. They, too, select a bird.\n\n\t\t
+       On the next screen, there is a square view where game play occurs.
+        Player one\'s bird will appear in the middle of that square. They can then move the bird.
+        Once the player is happy with the bird location, click the place button.
+        At this point, if the bird is overlapping any other bird or extends outside the playing space, that player loses and the game is over.\n\n\t\t
+       If the player successfully placed the bird, the second players\' bird appears and they can move it into place, then clicks the button. Again, the game tests to see if this bird is overlapping any other bird or extends outside the square.
+        If it does, this player loses and the game is over.
+        This ends a round.\n\n\t\tFor the next round, the birds from the first round are still on the screen and the order the players go in reverse.</string>
+
+</resources>
