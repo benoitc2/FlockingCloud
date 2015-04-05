@@ -79,6 +79,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onStartGame(View view){
+       // uncomment these 3 lines & comment out the other intent declaration to see game working
        // Intent intent = new Intent(this, GameActivity.class);
        // intent.putExtra(GameActivity.PLAYER_ONE, playerOne.getText().toString());
        // intent.putExtra(GameActivity.PLAYER_TWO, playerTwo.getText().toString());
