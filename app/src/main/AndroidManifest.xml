@@ -30,6 +30,10 @@
             android:name=".ScoreActivity"
             android:label="@string/title_activity_score" >
         </activity>
+        <activity
+            android:name=".CreateAccount"
+            android:label="@string/title_activity_user_create" >
+        </activity>
     </application>
 
 </manifest>

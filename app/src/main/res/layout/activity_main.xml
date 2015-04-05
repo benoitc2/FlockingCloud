@@ -72,7 +72,8 @@
                 android:text="@string/player_two"
                 android:id="@+id/player_two"
                 android:layout_margin="0dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:hint="@string/confirm" />
 
         </LinearLayout>
 

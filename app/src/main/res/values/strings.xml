@@ -32,5 +32,9 @@
        If the player successfully placed the bird, the second players\' bird appears and they can move it into place, then clicks the button. Again, the game tests to see if this bird is overlapping any other bird or extends outside the square.
         If it does, this player loses and the game is over.
         This ends a round.\n\n\t\tFor the next round, the birds from the first round are still on the screen and the order the players go in reverse.</string>
-
+    <string name="title_activity_user_create">CreateAccount</string>
+    <string name="user">User Name</string>
+    <string name="password">Password</string>
+    <string name="confirm">Confirm Password</string>
+    <string name="createAccount">Create Account</string>
 </resources>

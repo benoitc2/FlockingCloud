@@ -79,10 +79,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onStartGame(View view){
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(GameActivity.PLAYER_ONE, playerOne.getText().toString());
-        intent.putExtra(GameActivity.PLAYER_TWO, playerTwo.getText().toString());
+       // Intent intent = new Intent(this, GameActivity.class);
+       // intent.putExtra(GameActivity.PLAYER_ONE, playerOne.getText().toString());
+       // intent.putExtra(GameActivity.PLAYER_TWO, playerTwo.getText().toString());
 
+        Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }
 }
