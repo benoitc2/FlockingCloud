@@ -3,6 +3,13 @@ package edu.msu.wegschei.flocking;
 import android.util.Log;
 import android.util.Xml;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -10,9 +17,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Spencer on 4/7/2015 in Flocking.
@@ -21,28 +31,8 @@ import java.net.URL;
 public class FlockCloud {
     private static final String MAGIC = "3XrP3Q4IMunPcp";
     private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php";
-    private static final String CREATE_USER_URL = ""; // empty for now
+    private static final String CREATE_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
 
-    /**
-     * Skip the XML parser to the end tag for whatever
-     * tag we are currently within.
-     * @param xml the parser
-     * @throws IOException
-     * @throws XmlPullParserException
-     */
-    public static void skipToEndTag(XmlPullParser xml)
-            throws IOException, XmlPullParserException {
-        int tag;
-        do
-        {
-            tag = xml.next();
-            if(tag == XmlPullParser.START_TAG) {
-                // Recurse over any start tag
-                skipToEndTag(xml);
-            }
-        } while(tag != XmlPullParser.END_TAG &&
-                tag != XmlPullParser.END_DOCUMENT);
-    }
 
     /**
      * Check user id and password from the server.
@@ -74,5 +64,39 @@ public class FlockCloud {
         } catch (IOException ex) {
             return null;
         }
+    }
+
+    /**
+     * Create a new user
+     * @param id id for the new user
+     * @param pw password for the new user
+     * @return reference to an input stream or null if this fails
+     */
+    public InputStream createUser(String id, String pw) {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(CREATE_USER_URL);
+
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("user", id));
+        pairs.add(new BasicNameValuePair("magic", MAGIC));
+        pairs.add(new BasicNameValuePair("pw", pw));
+        try {
+            post.setEntity(new UrlEncodedFormEntity(pairs));
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+        HttpResponse response = null;
+        try {
+            response = client.execute(post);
+        } catch (IOException e) {
+            return null;
+        }
+        InputStream stream = null;
+        try {
+            stream = response.getEntity().getContent();
+        } catch (IOException e) {
+            return null;
+        }
+        return stream;
     }
 }
