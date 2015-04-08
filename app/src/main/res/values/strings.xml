@@ -45,7 +45,7 @@
     <string name="noUserPw">You must enter your password.</string>
     <string name="loginError">Failed to log in.</string>
     <string name="nameTaken">The username is already in use.</string>
-    <string name="creatingUser">Creating user&#8230</string>
+    <string name="creatingUser">Creating user..</string>
     <string name="createSuccess">User created. Please log in.</string>
     <string name="createFail">Failed to create.</string>
     <string name="noPwMatch">Passwords don\'t match.</string>

@@ -31,7 +31,7 @@ public class LoginActivity extends ActionBarActivity {
         }
     }
 
-    public void loadInstanceState(Bundle bundle) {
+    void loadInstanceState(Bundle bundle) {
         String nameOne = bundle.getString(PLAYER_NAME);
         String nameTwo = bundle.getString(PLAYER_PASSWORD);
 

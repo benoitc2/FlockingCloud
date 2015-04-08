@@ -24,10 +24,10 @@ import java.util.List;
  * Created by Spencer on 4/7/2015 in Flocking.
  * This class handles all client-side communication to the server
  */
-public class FlockCloud {
+class FlockCloud {
     private static final String MAGIC = "3XrP3Q4IMunPcp";
-    private static final String LOGIN_URL = "https://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php";
-    private static final String CREATE_USER_URL = "https://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
+    private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php";
+    private static final String CREATE_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
 
 
     /**

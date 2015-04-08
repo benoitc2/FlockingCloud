@@ -127,7 +127,7 @@ public class CreateAccount extends ActionBarActivity {
         }
     }
 
-    public void onReturnToLogin(){
+    void onReturnToLogin(){
         this.finish();
     }
 
