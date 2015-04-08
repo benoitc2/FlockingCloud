@@ -129,9 +129,6 @@ public class CreateAccount extends ActionBarActivity {
     }
 
     public void onReturnToLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
-
-        startActivity(intent);
         this.finish();
     }
 
