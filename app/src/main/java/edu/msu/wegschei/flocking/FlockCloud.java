@@ -1,7 +1,6 @@
 package edu.msu.wegschei.flocking;
 
-import android.util.Log;
-import android.util.Xml;
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -10,13 +9,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -54,9 +50,7 @@ public class FlockCloud {
                 return null;
             }
 
-            InputStream stream = conn.getInputStream();
-
-            return stream;
+            return conn.getInputStream();
 
         } catch (MalformedURLException e) {
             // Should never happen

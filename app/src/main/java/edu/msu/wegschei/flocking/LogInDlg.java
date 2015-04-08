@@ -39,7 +39,7 @@ public class LogInDlg extends DialogFragment {
 
     /**
      * Setter for 'userId'
-     * @param userId
+     * @param userId user name to set
      */
     public void setUserId(String userId) {
         this.userId = userId;
@@ -51,7 +51,7 @@ public class LogInDlg extends DialogFragment {
 
     /**
      * Setter for 'userPw'
-     * @param userPw
+     * @param userPw user password to set
      */
     public void setUserPw(String userPw) {
         this.userPw = userPw;
