@@ -76,19 +76,14 @@ public class LoginActivity extends ActionBarActivity {
         }
     }
 
-    public void onStartGame(View view){
-        //Here is where we need to query (or call a function to query) the server to see if this user
-        //exists.  If they do, proceed with the rest of the function (just loads up the main game atm)
-
-
-        Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra(GameActivity.PLAYER_ONE, playerName.getText().toString());
-        //intent.putExtra(GameActivity.PLAYER_TWO, playerPassword.getText().toString());
-
-        startActivity(intent);
+    public void onLogin(View view) {
+        LogInDlg checkDlg = new LogInDlg();
+        checkDlg.setUserId(playerName.getText().toString());
+        checkDlg.setUserPw(playerPassword.getText().toString());
+        checkDlg.show(getFragmentManager(), "logging in");
     }
 
-    public void onCreateAccount(View view){
+    public void onCreateAccount(View view) {
         Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }

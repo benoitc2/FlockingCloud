@@ -38,4 +38,10 @@
     <string name="confirm">Confirm Password</string>
     <string name="createAccount">Create Account</string>
     <string name="login">Log In</string>
+    <string name="wait">Please wait..</string>
+    <string name="userIdError">User does not exist</string>
+    <string name="pwError">Password does not match</string>
+    <string name="noUserId">You must enter your user name</string>
+    <string name="noUserPw">You must enter your passwrd</string>
+    <string name="loginError">Failed to log in</string>
 </resources>
