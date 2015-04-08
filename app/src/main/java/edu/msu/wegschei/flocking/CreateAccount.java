@@ -39,7 +39,7 @@ public class CreateAccount extends ActionBarActivity {
 
         if(userPassword.getText().toString().equals(userPasswordConfirm.getText().toString()) && userName.getText().toString().length() > 0) {
             //Requirements met, query server to create this user
-            Toast.makeText(view.getContext(), "Creating User...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), R.string.creatingUser, Toast.LENGTH_SHORT).show();
 
             // Create a thread to save the hatting
             new Thread(new Runnable() {
