@@ -44,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".1"
-            android:layout_gravity="center" >
+            android:layout_gravity="center"
+            android:paddingBottom="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
-            android:layout_gravity="center" >
+            android:layout_gravity="center"
+            android:paddingBottom="15dp">
 
             <EditText
                 android:layout_width="match_parent"
@@ -99,15 +101,31 @@
             android:id="@+id/frameLayout4" />
     </LinearLayout>
 
-    <Button
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:id="@+id/login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:onClick="onLogin" />
+        android:gravity="center_horizontal">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rememberMe"
+            android:id="@+id/rememberMe" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:id="@+id/login"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:onClick="onLogin" />
+
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -118,4 +136,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:onClick="onCreateAccount" />
+
 </RelativeLayout>

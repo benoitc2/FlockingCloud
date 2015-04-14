@@ -50,4 +50,5 @@
     <string name="createFail">Failed to create.</string>
     <string name="noPwMatch">Passwords don\'t match.</string>
     <string name="userIdWarning">User name must be more than 1 character.</string>
+    <string name="rememberMe">Remember Me</string>
 </resources>

@@ -75,6 +75,7 @@
                 android:layout_margin="0dp"
                 android:textSize="20sp"
                 android:hint="@string/confirm" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -108,7 +109,17 @@
             android:layout_height="fill_parent"
             android:layout_weight=".25"
             android:id="@+id/frameLayout2" />
+
     </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rememberMe"
+        android:id="@+id/rememberMe"
+        android:layout_above="@+id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -129,4 +140,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
         android:onClick="onCreateAccount" />
+
 </RelativeLayout>
