@@ -42,6 +42,10 @@
             android:name=".CreateAccount"
             android:label="@string/title_activity_user_create" >
         </activity>
+        <activity
+            android:name=".WaitingActivity"
+            android:label="@string/title_activity_waiting" >
+        </activity>
     </application>
 
 </manifest>
