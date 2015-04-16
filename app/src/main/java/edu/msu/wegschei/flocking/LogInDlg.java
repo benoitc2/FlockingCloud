@@ -173,7 +173,7 @@ public class LogInDlg extends DialogFragment {
 
                                     xml.nextTag();      // Advance to first tag
                                     xml.require(XmlPullParser.START_TAG, null, "flocking");
-                                    //String waitingPlayer = xml.getAttributeValue(null, "waitingPlayer");
+                                    String waitingPlayer = xml.getAttributeValue(null, "waitingPlayer");
 
                                     //if(waitingPlayer != null) {
 

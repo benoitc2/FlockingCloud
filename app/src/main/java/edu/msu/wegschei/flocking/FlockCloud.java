@@ -28,7 +28,7 @@ class FlockCloud {
     private static final String MAGIC = "3XrP3Q4IMunPcp";
     private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php";
     private static final String CREATE_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
-    private static final String WAITING_USER_URL = "";
+    private static final String WAITING_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/matchmaking.php";
 
     /**
      * Check user id and password from the server.
