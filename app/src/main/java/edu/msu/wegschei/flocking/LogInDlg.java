@@ -58,6 +58,16 @@ public class LogInDlg extends DialogFragment {
     }
 
     /**
+     * player one name
+     */
+    private String playerOne;
+
+    /**
+     * player two name
+     */
+    private String playerTwo;
+
+    /**
      * Create the dialog box
      */
     @Override
@@ -100,6 +110,39 @@ public class LogInDlg extends DialogFragment {
                         String status = xml.getAttributeValue(null, "status");
                         if(status.equals("yes")) {
                             // Login success!
+
+                            InputStream stream2 = cloud.checkIfPlayerWaiting (userId);
+                            boolean failed = stream2 == null;
+                            if(!failed) {
+                                try {
+                                    XmlPullParser xml2 = Xml.newPullParser();
+                                    xml2.setInput(stream2, "UTF-8");
+
+                                    xml2.nextTag();      // Advance to first tag
+                                    xml2.require(XmlPullParser.START_TAG, null, "flocking");
+                                    String matchStatus = xml2.getAttributeValue(null, "status");
+
+                                    if(matchStatus.equals("found")) {
+                                        // player 1 and player 2 are returned here
+                                        playerOne = xml2.getAttributeValue(null, "p1");
+                                        playerTwo = xml2.getAttributeValue(null, "p2");
+                                    }
+                                    else {
+                                        // Try matchmaking url again in waiting activity
+                                    }
+                                } catch (IOException ex) {
+                                    failed = true;
+                                } catch (XmlPullParserException ex) {
+                                    failed = true;
+                                } finally {
+                                    try {
+                                        stream.close();
+                                    } catch (IOException ex) {
+                                    }
+                                }
+                            }
+
+
                         } else {
                             // Failed login, parse error message from the server
                             String msg = xml.getAttributeValue(null, "msg");
@@ -164,34 +207,6 @@ public class LogInDlg extends DialogFragment {
 
                         } else {
 
-                            InputStream stream = cloud.checkIfPlayerWaiting ();
-                            boolean failed = stream == null;
-                            if(!failed) {
-                                try {
-                                    XmlPullParser xml = Xml.newPullParser();
-                                    xml.setInput(stream, "UTF-8");
-
-                                    xml.nextTag();      // Advance to first tag
-                                    xml.require(XmlPullParser.START_TAG, null, "flocking");
-                                    String waitingPlayer = xml.getAttributeValue(null, "waitingPlayer");
-
-                                    //if(waitingPlayer != null) {
-
-                                    //}
-                                    //else {
-
-                                    //}
-                                } catch (IOException ex) {
-                                    failed = true;
-                                } catch (XmlPullParserException ex) {
-                                    failed = true;
-                                } finally {
-                                    try {
-                                        stream.close();
-                                    } catch (IOException ex) {
-                                    }
-                                }
-                            }
 
 
                             // check server to see if there is a player waiting.
