@@ -22,7 +22,6 @@ public class GameActivity extends ActionBarActivity {
     private TextView textView;
     private Button placeButton;
 
-    public final static String YOU_START = "GameActivity.doYouStart";
     public final static String PLAYER_ONE = "GameActivity.playerOne";
     public final static String PLAYER_TWO = "GameActivity.playerTwo";
     public final static String ORDER = "GameActivity.order";

@@ -15,8 +15,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/login"
-            android:launchMode="singleTop"
-            android:noHistory="true">
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,8 +45,7 @@
         </activity>
         <activity
             android:name=".WaitingActivity"
-            android:label="@string/title_activity_waiting"
-            android:noHistory="true">
+            android:label="@string/title_activity_waiting">
         </activity>
         <activity
             android:name=".NotYourTurnActivity"
