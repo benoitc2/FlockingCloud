@@ -1,0 +1,60 @@
+
+Project 2 Submission
+
+Group Name:   Team FlockForDayz
+
+When you have completed the project, complete the following form and include it with your project. Include this file as a text file in the folder with your project when you turn it in. 
+
+For the Checkpoint, Describe a sequence of operations to create a new account and log onto the server:
+
+A functionality checklist will not be provided for the project. Treat this as you would a request from a client and identify what the client requires. 
+
+Member 1: Tanay Salpekar
+
+Responsiblity:
+
+Worked on mySQL tables and server side programming
+
+Member 2: Spencer Yi
+
+Responsiblity:
+
+Networking on the client
+
+Member 3: Christopher Benoit
+
+Responsiblity:
+
+Activity sequencing and layouts on screens
+
+Member 4 (if applicable): 
+
+Responsiblity:
+
+
+Provide instructions on how to reach the first editing activity if the login button is not yet functional.
+
+The login button and create user button are on the first screen. The create user screen asks for a username and a password (also a textbox to confirm the password). Then a call to the server is made to create a user. The login button is on the main screen as well and it leads to the screen which enters the name (if you pass the validations from the server)
+
+User account the server-side communications is running under: 
+
+salpeka1@msu.edu
+
+Paths to all server-side scripts: (Such as https://www.cse.msu.edu/~carter/project2/login.php). 
+
+http://webdev.cse.msu.edu/~salpeka1/cse476/project2/
+
+Where in the code the passive connection timeout is set (provide a script name and line number): 
+
+N/A
+
+Calls in the code to the server (provide a class name and function, or URL used for debugging): 
+
+FlockCloud class
+loginToServer method and createUser method 
+
+http://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php 
+http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php
+
+
+
