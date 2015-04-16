@@ -32,6 +32,9 @@ public class LogInDlg extends DialogFragment {
     private static final int NO_PW = 4;
     private static final int LOGIN_FAIL = 5;
 
+
+    private final static String PLAYER_ONE = "MainActivity.playerOne";
+    private final static String PLAYER_TWO = "MainActivity.playerTwo";
     /**
      * Id for the user
      */
@@ -142,7 +145,6 @@ public class LogInDlg extends DialogFragment {
                                 }
                             }
 
-
                         } else {
                             // Failed login, parse error message from the server
                             String msg = xml.getAttributeValue(null, "msg");
@@ -219,9 +221,19 @@ public class LogInDlg extends DialogFragment {
                             //      - send this user's info to the server as the waiting player 1 (also sets flag)
                             //      - go to activity_waiting
 
-                            if (getActivity() instanceof LoginActivity) {
+                            // if a game was found, set things up and send this player to it
+                            if (getActivity() instanceof LoginActivity && playerOne != null) {
                                 LoginActivity la = (LoginActivity) getActivity();
-                                Intent intent = new Intent(la, MainActivity.class);
+
+                                Intent intent = new Intent(la, GameActivity.class);
+                                intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
+                                intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
+
+                                la.startActivity(intent);
+                            }
+                            else {
+                                LoginActivity la = (LoginActivity) getActivity();
+                                Intent intent = new Intent(la, WaitingActivity.class);
                                 la.startActivity(intent);
                             }
                         }
