@@ -108,6 +108,8 @@ public class  Game {
     private final static String PLAYER_TWO = "Game.playerTwo";
     private final static String STATE = "Game.state";
     private final static String ORDER = "Game.order";
+    private final static String YOU_START = "Game.youStart";
+
 
     public enum State {
         START,
@@ -124,6 +126,9 @@ public class  Game {
      */
     private String playerOne;
     private String playerTwo;
+
+    public void SetPlayerOne(String p1) { playerOne = p1;}
+    public void SetPlayerTwo(String p2) { playerTwo = p2;}
 
     public Game(Context context, View parent) {
         parentContext = context;
@@ -259,6 +264,11 @@ public class  Game {
         if(dragging != null) {
             birds.remove(dragging);
             birds.add(dragging);
+        }
+
+        if(bundle.getString(YOU_START) == "NO") {
+            Intent intent = new Intent(parentContext, NotYourTurnActivity.class);
+            parentContext.startActivity(intent);
         }
     }
 

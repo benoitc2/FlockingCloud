@@ -46,6 +46,10 @@
             android:name=".WaitingActivity"
             android:label="@string/title_activity_waiting" >
         </activity>
+        <activity
+            android:name=".NotYourTurnActivity"
+            android:label="@string/title_not_your_turn" >
+        </activity>
     </application>
 
 </manifest>
