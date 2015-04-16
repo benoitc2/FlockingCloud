@@ -164,6 +164,16 @@ public class LogInDlg extends DialogFragment {
 
                         } else {
 
+                            // check server to see if there is a player waiting.
+                            // if yes:
+                            //      - send userID to server for the other player,
+                            //      - set that player and this user's name as players 1&2
+                            //      - set the flag for a waiting player to false (or whatever needs to be done here)
+                            //      - bring this player to a waiting screen as the first player starts bird selection
+                            // if no:
+                            //      - send this user's info to the server as the waiting player 1 (also sets flag)
+                            //      - go to activity_waiting
+
                             if (getActivity() instanceof LoginActivity) {
                                 LoginActivity la = (LoginActivity) getActivity();
                                 Intent intent = new Intent(la, MainActivity.class);
