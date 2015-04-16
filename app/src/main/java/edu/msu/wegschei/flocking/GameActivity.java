@@ -28,6 +28,7 @@ public class GameActivity extends ActionBarActivity {
     public final static String COUNTER = "GameActivity.counter";
     public final static String MESSAGE_TEXT = "GameActivity.messageText";
     public final static String BUTTON_TEXT = "GameActivity.buttonText";
+    public final static String YOU_START = "GameActivity.youStart";
 
     private final static int BIRD_SELECTION = 1;
 

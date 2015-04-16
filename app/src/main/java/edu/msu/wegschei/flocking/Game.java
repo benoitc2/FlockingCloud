@@ -266,7 +266,7 @@ public class  Game {
             birds.add(dragging);
         }
 
-        if(bundle.getString(YOU_START) == "NO") {
+        if(bundle.getString(YOU_START).equals("NO")) {
             Intent intent = new Intent(parentContext, NotYourTurnActivity.class);
             parentContext.startActivity(intent);
         }

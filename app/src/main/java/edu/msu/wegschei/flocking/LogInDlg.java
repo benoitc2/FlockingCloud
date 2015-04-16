@@ -234,6 +234,7 @@ public class LogInDlg extends DialogFragment {
                                 LoginActivity la = (LoginActivity) getActivity();
 
                                 Intent intent = new Intent(la, GameActivity.class);
+                                intent.putExtra(GameActivity.YOU_START, "YES");
                                 intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
                                 intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
 
