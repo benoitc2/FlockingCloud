@@ -85,7 +85,7 @@ public class LogInDlg extends DialogFragment {
 
             @Override
             public void run() {
-                FlockCloud cloud = new FlockCloud();
+                final FlockCloud cloud = new FlockCloud();
                 InputStream stream = cloud.loginToServer(userId, userPw);
 
                 // Test for an error
@@ -163,6 +163,36 @@ public class LogInDlg extends DialogFragment {
                             }
 
                         } else {
+
+                            InputStream stream = cloud.checkIfPlayerWaiting ();
+                            boolean failed = stream == null;
+                            if(!failed) {
+                                try {
+                                    XmlPullParser xml = Xml.newPullParser();
+                                    xml.setInput(stream, "UTF-8");
+
+                                    xml.nextTag();      // Advance to first tag
+                                    xml.require(XmlPullParser.START_TAG, null, "flocking");
+                                    //String waitingPlayer = xml.getAttributeValue(null, "waitingPlayer");
+
+                                    //if(waitingPlayer != null) {
+
+                                    //}
+                                    //else {
+
+                                    //}
+                                } catch (IOException ex) {
+                                    failed = true;
+                                } catch (XmlPullParserException ex) {
+                                    failed = true;
+                                } finally {
+                                    try {
+                                        stream.close();
+                                    } catch (IOException ex) {
+                                    }
+                                }
+                            }
+
 
                             // check server to see if there is a player waiting.
                             // if yes:

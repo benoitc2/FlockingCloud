@@ -28,7 +28,7 @@ class FlockCloud {
     private static final String MAGIC = "3XrP3Q4IMunPcp";
     private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php";
     private static final String CREATE_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
-
+    private static final String WAITING_USER_URL = "";
 
     /**
      * Check user id and password from the server.
@@ -92,5 +92,33 @@ class FlockCloud {
             return null;
         }
         return stream;
+    }
+
+    /**
+     * checks server to see if any player is waiting to begin a game.
+     * @return the waiting player's name if there is, null otherwise.
+     */
+    public InputStream checkIfPlayerWaiting() {
+
+        String query = WAITING_USER_URL + "?magic=" + MAGIC;
+
+        try {
+            URL url = new URL(query);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            int responseCode = conn.getResponseCode();
+            if(responseCode != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+
+
+            return conn.getInputStream();
+
+        } catch (MalformedURLException e) {
+            // Should never happen
+            return null;
+        } catch (IOException ex) {
+            return null;
+        }
     }
 }
