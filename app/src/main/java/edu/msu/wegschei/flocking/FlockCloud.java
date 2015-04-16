@@ -27,6 +27,7 @@ import java.util.List;
 class FlockCloud {
     private static final String MAGIC = "3XrP3Q4IMunPcp";
     private static final String LOGIN_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/login_user.php";
+    private static final String LOGOUT_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/invalidate.php";
     private static final String CREATE_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
     private static final String WAITING_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/matchmaking.php";
 
@@ -40,6 +41,35 @@ class FlockCloud {
 
         // Create a get query
         String query = LOGIN_URL + "?user=" + id + "&magic=" + MAGIC + "&pw=" + pw;
+
+        try {
+            URL url = new URL(query);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            int responseCode = conn.getResponseCode();
+            if(responseCode != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+
+            return conn.getInputStream();
+
+        } catch (MalformedURLException e) {
+            // Should never happen
+            return null;
+        } catch (IOException ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Logs a user out from the server
+     * @param id id for user
+     * @return reference to an input stream or null if this fails
+     */
+    public InputStream invalidateUser(String id) {
+
+        // Create a get query
+        String query = LOGOUT_URL + "?user=" + id + "&magic=" + MAGIC ;
 
         try {
             URL url = new URL(query);

@@ -97,7 +97,7 @@ public class LogInDlg extends DialogFragment {
         new Thread(new Runnable() {
 
             @Override
-            public void run() {
+                public void run() {
                 final FlockCloud cloud = new FlockCloud();
                 InputStream stream = cloud.loginToServer(userId, userPw);
 

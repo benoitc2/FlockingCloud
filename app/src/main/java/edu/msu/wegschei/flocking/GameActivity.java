@@ -73,14 +73,22 @@ public class GameActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.quit:
+                // Create a new thread to invalidate a user
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FlockCloud cloud = new FlockCloud();
+                        cloud.invalidateUser(playerNameOne);
+                    }
+                }).start();
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
     public void onPlace(View view) {
