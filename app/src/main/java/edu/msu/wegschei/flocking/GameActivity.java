@@ -22,7 +22,6 @@ public class GameActivity extends ActionBarActivity {
     private TextView textView;
     private Button placeButton;
 
-    public final static String YOU_START = "GameActivity.doYouStart";
     public final static String PLAYER_ONE = "GameActivity.playerOne";
     public final static String PLAYER_TWO = "GameActivity.playerTwo";
     public final static String ORDER = "GameActivity.order";
@@ -37,11 +36,14 @@ public class GameActivity extends ActionBarActivity {
     private ArrayList<String> players = new ArrayList<>();
     private int counter = 0;
 
+    private GameActivity ga;
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_game);
 
+        ga = this;
         gameView = (GameView)this.findViewById(R.id.gameView);
         placeButton = (Button) findViewById(R.id.buttonPlace);
         textView = (TextView)findViewById(R.id.textPlayer);
@@ -73,14 +75,24 @@ public class GameActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.quit:
+                // Create a new thread to invalidate a user
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FlockCloud cloud = new FlockCloud();
+                        cloud.invalidateUser(playerNameOne);
+                        Intent intent = new Intent(ga, LoginActivity.class);
+                        ga.startActivity(intent);
+                    }
+                }).start();
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
     public void onPlace(View view) {

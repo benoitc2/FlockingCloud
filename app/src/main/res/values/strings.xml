@@ -52,8 +52,6 @@
     <string name="userIdWarning">User name must be more than 1 character.</string>
     <string name="rememberMe">Remember Me</string>
     <string name="waiting">Waiting for Player 2..</string>
-    <string name="title_activity_waiting">Waiting</string>
-    <string name="waiting_other">Waiting on Other Player..</string>
-    <string name="title_not_your_turn">Waiting for Other Player</string>
+    <string name="title_activity_waiting">CreateAccount</string>
 
 </resources>

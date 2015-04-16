@@ -47,6 +47,14 @@ public class LogInDlg extends DialogFragment {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    /**
+     * Getter for 'userId'
+     */
+    public String getUserId() {
+       return this.userId;
+    }
+
     /**
      * Password for the user
      */
@@ -97,7 +105,7 @@ public class LogInDlg extends DialogFragment {
         new Thread(new Runnable() {
 
             @Override
-            public void run() {
+                public void run() {
                 final FlockCloud cloud = new FlockCloud();
                 InputStream stream = cloud.loginToServer(userId, userPw);
 
@@ -226,7 +234,6 @@ public class LogInDlg extends DialogFragment {
                                 LoginActivity la = (LoginActivity) getActivity();
 
                                 Intent intent = new Intent(la, GameActivity.class);
-                                intent.putExtra(GameActivity.YOU_START, "YES");
                                 intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
                                 intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
 
@@ -235,8 +242,7 @@ public class LogInDlg extends DialogFragment {
                             else {
                                 LoginActivity la = (LoginActivity) getActivity();
                                 Intent intent = new Intent(la, WaitingActivity.class);
-                                intent.putExtra(WaitingActivity.USER, userId);
-
+                                intent.putExtra(WaitingActivity.PLAYER_ONE, getUserId());
                                 la.startActivity(intent);
                             }
                         }
