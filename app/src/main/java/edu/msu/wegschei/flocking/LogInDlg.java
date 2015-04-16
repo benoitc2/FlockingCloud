@@ -47,6 +47,14 @@ public class LogInDlg extends DialogFragment {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    /**
+     * Getter for 'userId'
+     */
+    public String getUserId() {
+       return this.userId;
+    }
+
     /**
      * Password for the user
      */
@@ -234,6 +242,7 @@ public class LogInDlg extends DialogFragment {
                             else {
                                 LoginActivity la = (LoginActivity) getActivity();
                                 Intent intent = new Intent(la, WaitingActivity.class);
+                                intent.putExtra(WaitingActivity.PLAYER_ONE, getUserId());
                                 la.startActivity(intent);
                             }
                         }

@@ -36,11 +36,14 @@ public class GameActivity extends ActionBarActivity {
     private ArrayList<String> players = new ArrayList<>();
     private int counter = 0;
 
+    private GameActivity ga;
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_game);
 
+        ga = this;
         gameView = (GameView)this.findViewById(R.id.gameView);
         placeButton = (Button) findViewById(R.id.buttonPlace);
         textView = (TextView)findViewById(R.id.textPlayer);
@@ -80,6 +83,8 @@ public class GameActivity extends ActionBarActivity {
                     public void run() {
                         FlockCloud cloud = new FlockCloud();
                         cloud.invalidateUser(playerNameOne);
+                        Intent intent = new Intent(ga, LoginActivity.class);
+                        ga.startActivity(intent);
                     }
                 }).start();
                 return true;
