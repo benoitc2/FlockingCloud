@@ -2,6 +2,7 @@ package edu.msu.wegschei.flocking;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.util.Xml;
@@ -41,6 +42,14 @@ public class WaitingActivity extends ActionBarActivity {
 
     volatile boolean flag = true;
 
+    private Thread matchmakingThread;
+
+    private boolean failed = false;
+
+    private boolean onExit = false;
+
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,79 +67,89 @@ public class WaitingActivity extends ActionBarActivity {
             this.loadInstanceState(savedInstanceState);
         }
 
-        final View view = this.getWindow().getDecorView().getRootView();
+        final View view = findViewById(android.R.id.content);
+
+        handler = new Handler();
 
         // Create a thread to load the catalog
-        new Thread(new Runnable() {
+        matchmakingThread = new Thread(new Runnable() {
 
             @Override
             public void run() {
-                final FlockCloud cloud = new FlockCloud();
+                try {
+                    final FlockCloud cloud = new FlockCloud();
 
-                while (flag) {
-                    Log.d("Waiting Activity", "Inside Thread");
+                    while (flag) {
+                        Log.d("Waiting Activity", "Inside Thread");
 
-                    InputStream stream2 = cloud.checkIfPlayerWaiting(userId);
-                    boolean failed = stream2 == null;
-                    if (!failed) {
-                        try {
-                            XmlPullParser xml2 = Xml.newPullParser();
-                            xml2.setInput(stream2, "UTF-8");
-
-                            xml2.nextTag();      // Advance to first tag
-                            xml2.require(XmlPullParser.START_TAG, null, "flocking");
-                            String matchStatus = xml2.getAttributeValue(null, "status");
-
-                            if (matchStatus.equals("found")) {
-                                // player 1 and player 2 are returned here
-                                playerOne = xml2.getAttributeValue(null, "p1");
-                                playerTwo = xml2.getAttributeValue(null, "p2");
-                            } else {
-                                // Try matchmaking url again in waiting activity
-                            }
-                        } catch (IOException ex) {
-                            failed = true;
-                        } catch (XmlPullParserException ex) {
-                            failed = true;
-                        } finally {
+                        InputStream stream2 = cloud.checkIfPlayerWaiting(playerOne);
+                        failed = stream2 == null;
+                        if (!failed) {
                             try {
-                                stream2.close();
-                            } catch (IOException ex) {
-                            }
-                        }
-                    }
+                                XmlPullParser xml2 = Xml.newPullParser();
+                                xml2.setInput(stream2, "UTF-8");
 
-                    final boolean fail1 = failed;
-                    boolean post = view.post(new Runnable() {
+                                xml2.nextTag();      // Advance to first tag
+                                xml2.require(XmlPullParser.START_TAG, null, "flocking");
+                                String matchStatus = xml2.getAttributeValue(null, "status");
 
-                        @Override
-                        public void run() {
-                            if (!fail1) {
-
-                                // if a game was found, set things up and send this player to it
-                                if (playerOne == null) {
-
-                                    Intent intent = new Intent(wa, GameActivity.class);
-                                    intent.putExtra(GameActivity.YOU_START, "NO");
-                                    intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
-                                    intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
-
+                                if (matchStatus.equals("found")) {
+                                    // player 1 and player 2 are returned here
+                                    playerOne = xml2.getAttributeValue(null, "p1");
+                                    playerTwo = xml2.getAttributeValue(null, "p2");
                                     flag = false;
-                                    wa.startActivity(intent);
+                                }
+                            } catch (IOException ex) {
+                                failed = true;
+                            } catch (XmlPullParserException ex) {
+                                failed = true;
+                            } finally {
+                                try {
+                                    stream2.close();
+                                } catch (IOException ex) {
                                 }
                             }
                         }
-                    });
-                    try {
+
                         Thread.sleep(6000);
-                    } catch (Exception e) {
 
                     }
 
+                    matchmakingThread.interrupt();
+
+                    if (Thread.interrupted() && !onExit) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                boolean fail1 = failed;
+                                if (!fail1) {
+
+                                    // if a game was found, set things up and send this player to it
+                                    if (playerOne == null) {
+
+                                        Intent intent = new Intent(wa, GameActivity.class);
+                                        intent.putExtra(GameActivity.YOU_START, "NO");
+                                        intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
+                                        intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
+
+                                        wa.startActivity(intent);
+
+                                    }
+                                }
+                            }
+                        });
+
+                        //Log.d("METHOD RUN", post ? "YES" : "NO");
+                        return;
+                    }
+                } catch (InterruptedException e) {
+                    Log.d("UH OH", "BRO");
                 }
 
             }
-        }).start();
+        });
+
+        matchmakingThread.start();
 
     }
 
@@ -169,6 +188,16 @@ public class WaitingActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (matchmakingThread.isAlive()) {
+            flag = false;
+            onExit = true;
+            Log.d("Killed thread", "Killed thread");
+        }
+        super.onBackPressed();
     }
 
     //This class is where we check with the server to see if there is a player 2 found.

@@ -137,6 +137,8 @@ public class LogInDlg extends DialogFragment {
                                         // player 1 and player 2 are returned here
                                         playerOne = xml2.getAttributeValue(null, "p1");
                                         playerTwo = xml2.getAttributeValue(null, "p2");
+                                        int x = 7 + 8;
+                                        x = x + 5;
                                     }
                                     else {
                                         // Try matchmaking url again in waiting activity
@@ -243,7 +245,7 @@ public class LogInDlg extends DialogFragment {
                             else {
                                 LoginActivity la = (LoginActivity) getActivity();
                                 Intent intent = new Intent(la, WaitingActivity.class);
-                                intent.putExtra(WaitingActivity.PLAYER_ONE, getUserId());
+                                intent.putExtra(WaitingActivity.PLAYER_ONE, userId);
                                 la.startActivity(intent);
                             }
                         }
