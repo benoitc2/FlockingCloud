@@ -118,29 +118,18 @@ public class WaitingActivity extends ActionBarActivity {
                     matchmakingThread.interrupt();
 
                     if (Thread.interrupted() && !onExit) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                boolean fail1 = failed;
-                                if (!fail1) {
 
-                                    // if a game was found, set things up and send this player to it
-                                    if (playerOne == null) {
+                        // if a game was found, set things up and send this player to it
+                        if (playerOne != null) {
 
-                                        Intent intent = new Intent(wa, GameActivity.class);
-                                        intent.putExtra(GameActivity.YOU_START, "NO");
-                                        intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
-                                        intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
+                            Intent intent = new Intent(wa, GameActivity.class);
+                            intent.putExtra(GameActivity.YOU_START, "NO");
+                            intent.putExtra(GameActivity.PLAYER_ONE, playerOne);
+                            intent.putExtra(GameActivity.PLAYER_TWO, playerTwo);
 
-                                        wa.startActivity(intent);
+                            wa.startActivity(intent);
 
-                                    }
-                                }
-                            }
-                        });
-
-                        //Log.d("METHOD RUN", post ? "YES" : "NO");
-                        return;
+                        }
                     }
                 } catch (InterruptedException e) {
                     Log.d("UH OH", "BRO");
