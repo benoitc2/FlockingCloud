@@ -111,7 +111,7 @@ public class WaitingActivity extends ActionBarActivity {
                             }
                         }
 
-                        Thread.sleep(6000);
+                        if (flag) Thread.sleep(6000);
 
                     }
 
