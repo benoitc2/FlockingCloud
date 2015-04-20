@@ -119,9 +119,10 @@
         android:id="@+id/rememberMe"
         android:layout_above="@+id/login"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="0dp"
         android:checked="false"
-        android:nestedScrollingEnabled="false" />
+        android:nestedScrollingEnabled="false"
+        android:layout_marginTop="5dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -130,7 +131,7 @@
         android:id="@+id/login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:onClick="onLogin" />
 
     <Button
