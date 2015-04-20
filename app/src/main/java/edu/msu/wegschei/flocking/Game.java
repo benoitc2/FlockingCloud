@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class  Game {
 
+    
     /**
      * Paint for filling the area the game is in
      */
@@ -266,7 +267,7 @@ public class  Game {
             birds.add(dragging);
         }
 
-        if(bundle.getString(YOU_START) == "NO") {
+        if(bundle.getString(YOU_START).equals("NO")) {
             Intent intent = new Intent(parentContext, NotYourTurnActivity.class);
             parentContext.startActivity(intent);
         }
@@ -318,6 +319,7 @@ public class  Game {
 
         switch (state) {
             case START:
+<<<<<<< HEAD
                 state = State.PLAYER_ONE_SELECTING;
                 startSelectionActivity(playerOne);
                 break;
@@ -336,23 +338,34 @@ public class  Game {
                     dragging = next;
                     birds.add(dragging);
                     next = new Bird(parentContext, birdID);
+=======
+                if(player1First) {
+                    state = State.PLAYER_ONE_SELECTING;
+                    startSelectionActivity(playerOne);
+                }else {
+                    state = State.PLAYER_TWO_SELECTING;
+                    startSelectionActivity(playerTwo);
+>>>>>>> 6e6cf606b53e5475b875555c1be7d403e29eedea
                 }
+
+                break;
+
+            case PLAYER_ONE_SELECTING:
+                state = State.PLAYER_ONE_PLACING;
+                dragging = next;
+                birds.add(dragging);
+                next = new Bird(parentContext, birdID);
                 break;
 
             case PLAYER_TWO_SELECTING:
-                if(player1First) {
-                    state = State.PLAYER_ONE_PLACING;
-                    dragging = next;
-                    birds.add(dragging);
-                    next = new Bird(parentContext, birdID);
-                } else {
-                    state = State.PLAYER_ONE_SELECTING;
-                    next = new Bird(parentContext, birdID);
-                    startSelectionActivity(playerOne);
-                }
+                state = State.PLAYER_TWO_PLACING;
+                dragging = next;
+                birds.add(dragging);
+                next = null;
                 break;
 
             case PLAYER_ONE_PLACING:
+<<<<<<< HEAD
                 if(player1First) {
                     state = State.PLAYER_TWO_PLACING;
                     //dragging = next;
@@ -378,6 +391,19 @@ public class  Game {
                     birds.add(dragging);
                     next = null;
                 }
+=======
+                dragging = null;
+                player1First = !player1First;
+                state = State.PLAYER_TWO_SELECTING;
+                startSelectionActivity(playerTwo);
+                break;
+
+            case PLAYER_TWO_PLACING:
+                dragging = null;
+                player1First = !player1First;
+                state = State.PLAYER_ONE_SELECTING;
+                startSelectionActivity(playerOne);
+>>>>>>> 6e6cf606b53e5475b875555c1be7d403e29eedea
                 break;
         }
 

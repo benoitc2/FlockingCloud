@@ -28,6 +28,7 @@ public class GameActivity extends ActionBarActivity {
     public final static String COUNTER = "GameActivity.counter";
     public final static String MESSAGE_TEXT = "GameActivity.messageText";
     public final static String BUTTON_TEXT = "GameActivity.buttonText";
+    public final static String YOU_START = "GameActivity.youStart";
 
     private final static int BIRD_SELECTION = 1;
     private final static int RESPONSE_FROM_SERVER = 2;
@@ -84,8 +85,7 @@ public class GameActivity extends ActionBarActivity {
                     public void run() {
                         FlockCloud cloud = new FlockCloud();
                         cloud.invalidateUser(playerNameOne);
-                        Intent intent = new Intent(ga, LoginActivity.class);
-                        ga.startActivity(intent);
+                        finish();
                     }
                 }).start();
                 return true;
