@@ -311,62 +311,42 @@ public class  Game {
     public void advanceGame(int birdID) {
         switch (state) {
             case START:
-                state = State.PLAYER_ONE_SELECTING;
-                startSelectionActivity(playerOne);
+                if(player1First) {
+                    state = State.PLAYER_ONE_SELECTING;
+                    startSelectionActivity(playerOne);
+                }else {
+                    state = State.PLAYER_TWO_SELECTING;
+                    startSelectionActivity(playerTwo);
+                }
+
                 break;
 
             case PLAYER_ONE_SELECTING:
-                if(player1First) {
-                    state = State.PLAYER_TWO_SELECTING;
-                    next = new Bird(parentContext, birdID);
-                    startSelectionActivity(playerTwo);
-                } else {
-                    state = State.PLAYER_TWO_PLACING;
-                    dragging = next;
-                    birds.add(dragging);
-                    next = new Bird(parentContext, birdID);
-                }
+                state = State.PLAYER_ONE_PLACING;
+                dragging = next;
+                birds.add(dragging);
+                next = new Bird(parentContext, birdID);
                 break;
 
             case PLAYER_TWO_SELECTING:
-                if(player1First) {
-                    state = State.PLAYER_ONE_PLACING;
-                    dragging = next;
-                    birds.add(dragging);
-                    next = new Bird(parentContext, birdID);
-                } else {
-                    state = State.PLAYER_ONE_SELECTING;
-                    next = new Bird(parentContext, birdID);
-                    startSelectionActivity(playerOne);
-                }
+                state = State.PLAYER_TWO_PLACING;
+                dragging = next;
+                birds.add(dragging);
+                next = null;
                 break;
 
             case PLAYER_ONE_PLACING:
-                if(player1First) {
-                    state = State.PLAYER_TWO_PLACING;
-                    dragging = next;
-                    birds.add(dragging);
-                    next = null;
-                } else {
-                    dragging = null;
-                    player1First = !player1First;
-                    state = State.PLAYER_ONE_SELECTING;
-                    startSelectionActivity(playerOne);
-                }
+                dragging = null;
+                player1First = !player1First;
+                state = State.PLAYER_TWO_SELECTING;
+                startSelectionActivity(playerTwo);
                 break;
 
             case PLAYER_TWO_PLACING:
-                if(player1First) {
-                    dragging = null;
-                    player1First = !player1First;
-                    state = State.PLAYER_TWO_SELECTING;
-                    startSelectionActivity(playerTwo);
-                } else {
-                    state = State.PLAYER_ONE_PLACING;
-                    dragging = next;
-                    birds.add(dragging);
-                    next = null;
-                }
+                dragging = null;
+                player1First = !player1First;
+                state = State.PLAYER_ONE_SELECTING;
+                startSelectionActivity(playerOne);
                 break;
         }
     }

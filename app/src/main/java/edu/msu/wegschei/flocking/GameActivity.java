@@ -84,8 +84,7 @@ public class GameActivity extends ActionBarActivity {
                     public void run() {
                         FlockCloud cloud = new FlockCloud();
                         cloud.invalidateUser(playerNameOne);
-                        Intent intent = new Intent(ga, LoginActivity.class);
-                        ga.startActivity(intent);
+                        finish();
                     }
                 }).start();
                 return true;

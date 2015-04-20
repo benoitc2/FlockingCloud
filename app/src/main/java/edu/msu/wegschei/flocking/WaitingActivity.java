@@ -167,7 +167,6 @@ public class WaitingActivity extends ActionBarActivity {
                         FlockCloud cloud = new FlockCloud();
                         cloud.invalidateUser(playerOne);
                         Intent intent = new Intent(wa, LoginActivity.class);
-                        wa.startActivity(intent);
                         wa.finish();
                     }
                 }).start();
@@ -188,8 +187,4 @@ public class WaitingActivity extends ActionBarActivity {
         }
         super.onBackPressed();
     }
-
-    //This class is where we check with the server to see if there is a player 2 found.
-    //If there is, then this class takes in the name of the new player and exits to the
-    //starting game screen, with both names passed into it.
 }
