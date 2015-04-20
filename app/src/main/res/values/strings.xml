@@ -53,5 +53,5 @@
     <string name="waiting">Waiting for Player 2..</string>
     <string name="title_activity_waiting">CreateAccount</string>
     <string name="title_not_your_turn">Waiting for Other Player</string>
-
+    <string name="quit">Quit</string>
 </resources>
