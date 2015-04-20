@@ -308,7 +308,14 @@ public class  Game {
         ((Activity)parentContext).startActivityForResult(intent, 1);
     }
 
+    private void startWaitingActivity() {
+        Intent intent = new Intent(parentContext, WaitingActivity.class);
+        ((Activity)parentContext).startActivityForResult(intent, 2);
+    }
+
     public void advanceGame(int birdID) {
+        boolean test = player1First;
+
         switch (state) {
             case START:
                 state = State.PLAYER_ONE_SELECTING;
@@ -316,10 +323,14 @@ public class  Game {
                 break;
 
             case PLAYER_ONE_SELECTING:
+                // Player 1 selects the bird first and place it regardless player 2 has chosen his bird or not.
                 if(player1First) {
-                    state = State.PLAYER_TWO_SELECTING;
-                    next = new Bird(parentContext, birdID);
-                    startSelectionActivity(playerTwo);
+                    //state = State.PLAYER_TWO_SELECTING;
+                    state = State.PLAYER_ONE_PLACING;
+                    //next = new Bird(parentContext, birdID);
+                    //startSelectionActivity(playerTwo);
+                    dragging = new Bird(parentContext, birdID);
+                    birds.add(dragging);
                 } else {
                     state = State.PLAYER_TWO_PLACING;
                     dragging = next;
@@ -344,9 +355,9 @@ public class  Game {
             case PLAYER_ONE_PLACING:
                 if(player1First) {
                     state = State.PLAYER_TWO_PLACING;
-                    dragging = next;
-                    birds.add(dragging);
-                    next = null;
+                    //dragging = next;
+                    //birds.add(dragging);
+                    //next = null;
                 } else {
                     dragging = null;
                     player1First = !player1First;
@@ -360,7 +371,7 @@ public class  Game {
                     dragging = null;
                     player1First = !player1First;
                     state = State.PLAYER_TWO_SELECTING;
-                    startSelectionActivity(playerTwo);
+                    //startSelectionActivity(playerTwo);
                 } else {
                     state = State.PLAYER_ONE_PLACING;
                     dragging = next;
@@ -369,6 +380,7 @@ public class  Game {
                 }
                 break;
         }
+
     }
 
     public void setNames(String p1, String p2) {

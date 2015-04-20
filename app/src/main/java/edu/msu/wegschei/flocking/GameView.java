@@ -18,6 +18,9 @@ public class GameView extends View {
      */
     private Game game;
 
+    public Game getGame() {
+        return game;
+    }
     public GameView(Context context) {
         super(context);
         init(null, 0);

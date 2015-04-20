@@ -30,6 +30,7 @@ public class GameActivity extends ActionBarActivity {
     public final static String BUTTON_TEXT = "GameActivity.buttonText";
 
     private final static int BIRD_SELECTION = 1;
+    private final static int RESPONSE_FROM_SERVER = 2;
 
     private String playerNameOne;
     private String playerNameTwo;
@@ -100,6 +101,35 @@ public class GameActivity extends ActionBarActivity {
         if(originalState == Game.State.PLAYER_ONE_WON || originalState == Game.State.PLAYER_TWO_WON) {
             gameView.end();
         } else {
+            // post the bird's current location to the server
+            gameView.onPlace();
+
+            // Create a new thread to post a bird placement
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    FlockCloud cloud = new FlockCloud();
+
+                    // Get the last bird in the bird list (The bird player just placed!)
+                    Bird pb = gameView.getGame().birds.get(gameView.getGame().birds.size()-1);
+
+                    cloud.postBird(playerNameOne, pb.getX(), pb.getY(), pb.getId());
+
+                    // Move to NotYourTurnActivity and wait for player 2!
+                    Intent intent = new Intent(ga, NotYourTurnActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    ga.startActivityForResult(intent, 2);
+                }
+            }).start();
+            Game.State newState = gameView.getState();
+            if(newState ==  Game.State.PLAYER_ONE_WON) {
+                textView.setText(playerNameOne + " wins!");
+                placeButton.setText("Continue");
+            } else if (newState ==  Game.State.PLAYER_TWO_WON) {
+                textView.setText(playerNameTwo + " wins!");
+                placeButton.setText("Continue");
+            }
+            /*
             counter--;
             gameView.onPlace();
 
@@ -121,6 +151,7 @@ public class GameActivity extends ActionBarActivity {
                 textView.setText(playerNameTwo + " wins!");
                 placeButton.setText("Continue");
             }
+            */
         }
     }
 
@@ -150,11 +181,18 @@ public class GameActivity extends ActionBarActivity {
         if(requestCode == BIRD_SELECTION && resultCode == Activity.RESULT_OK){
             Bundle extras = data.getExtras();
             int birdID = extras.getInt("BirdImageID");
-            counter++;
+            //counter++;
+            /*
             if(counter == 2){
                 textView.setText(players.get(0) + ": Place your bird!");
             }
+            */
+            textView.setText(players.get(0) + ": Place your bird!");
             gameView.advanceGame(birdID);
+        }
+
+        if(requestCode == RESPONSE_FROM_SERVER && resultCode == Activity.RESULT_OK) {
+            // server returned a response with player 2 info
         }
     }
 }

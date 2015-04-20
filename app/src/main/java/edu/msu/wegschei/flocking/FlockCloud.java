@@ -30,6 +30,7 @@ class FlockCloud {
     private static final String LOGOUT_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/invalidate.php";
     private static final String CREATE_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/create_user.php";
     private static final String WAITING_USER_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/matchmaking.php";
+    private static final String PLACE_BIRD_URL = "http://webdev.cse.msu.edu/~salpeka1/cse476/project2/place_bird.php";
 
     /**
      * Check user id and password from the server.
@@ -151,5 +152,43 @@ class FlockCloud {
         } catch (IOException ex) {
             return null;
         }
+    }
+
+    /**
+     * Post a bird to the server
+     * @param user username for the user who is placing the bird
+     * @param x bird's x coordinate
+     * @param y bird's y coordinate
+     * @param bid bird's id for bitmap
+     * @return reference to an input stream or null if this fails
+     */
+    public InputStream postBird(String user, float x, float y, int bid ) {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(PLACE_BIRD_URL);
+
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("user", user));
+        pairs.add(new BasicNameValuePair("magic", MAGIC));
+        pairs.add(new BasicNameValuePair("x", String.valueOf(x)));
+        pairs.add(new BasicNameValuePair("y", String.valueOf(y)));
+        pairs.add(new BasicNameValuePair("bird", String.valueOf(bid)));
+        try {
+            post.setEntity(new UrlEncodedFormEntity(pairs));
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+        HttpResponse response = null;
+        try {
+            response = client.execute(post);
+        } catch (IOException e) {
+            return null;
+        }
+        InputStream stream = null;
+        try {
+            stream = response.getEntity().getContent();
+        } catch (IOException e) {
+            return null;
+        }
+        return stream;
     }
 }

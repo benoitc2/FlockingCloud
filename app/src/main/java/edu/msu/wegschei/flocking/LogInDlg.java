@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Toast;
@@ -229,7 +230,10 @@ public class LogInDlg extends DialogFragment {
                             //      - send this user's info to the server as the waiting player 1 (also sets flag)
                             //      - go to activity_waiting
 
+
                             // if a game was found, set things up and send this player to it
+                            playerOne = "test1";
+                            playerTwo = "test2";
                             if (getActivity() instanceof LoginActivity && playerOne != null) {
                                 LoginActivity la = (LoginActivity) getActivity();
 
@@ -245,6 +249,14 @@ public class LogInDlg extends DialogFragment {
                                 intent.putExtra(WaitingActivity.PLAYER_ONE, getUserId());
                                 la.startActivity(intent);
                             }
+
+
+                            /*
+                            LoginActivity la = (LoginActivity) getActivity();
+                            Intent intent = new Intent(la, SelectionActivity.class);
+                            intent.putExtra("PLAYER_NAME", getUserId());
+                            la.startActivity(intent);
+                            */
                         }
 
                     }
